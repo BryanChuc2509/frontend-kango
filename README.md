@@ -8,7 +8,7 @@ git clone https://github.com/BryanChuc2509/frontend-kango
 ```
 git checkout -b feature_new_branch
 ```
-3. Work in the new branch and when you had finished, add your new changes to staginng area with:
+3.Work on the new branch and when you're done, add the new changes to the staging area with:
 ```
 git add src/NewFile.tsx 
 ```
