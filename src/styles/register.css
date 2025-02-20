@@ -1,0 +1,154 @@
+body {
+  margin: 0;
+}
+
+/* Contenedor principal */
+.register-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0; /* Fondo general */
+}
+
+/* Panel izquierdo (Formulario) */
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  background-color: #ffffff;
+}
+
+/* Título */
+.title {
+  color: #04843C;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: -20px;
+}
+.subtitle{
+  margin-bottom: 2rem;
+  color: #04843C;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+/* Botón "Continuar con Google" */
+.btn-google {
+  width: 100%;
+  max-width: 320px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #04843C;
+  background-color: #fff;
+  border: 2px solid #04843C;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-google:hover {
+  background-color: #e2f4e7;
+}
+
+/* Icono de Google */
+.btn-google img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+/* Separador con la "o" */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #04843C;
+  margin-bottom: 1.5rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #04843C;
+  margin: 0 10px;
+}
+
+/* Formulario */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Campos de texto */
+.input-field {
+  padding: 14px;
+  font-size: 1rem;
+  border: 2px solid #04843C;
+  border-radius: 8px;
+  margin-bottom: 1.2rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: #04843C;
+}
+
+/* Botón "Continuar" */
+.btn-continue {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-left: 84PX;
+  margin-right: 84PX;
+  max-width: 150PX;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #04843C;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.btn-continue:hover {
+  background-color: #03682d;
+}
+
+/* Texto "Ya tengo una cuenta" */
+.already-account {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #04843C;
+  text-align: center;
+  cursor: pointer;
+}
+
+.already-account:hover {
+  text-decoration: underline;
+}
+
+/* Panel derecho (Imagen de fondo) */
+.right-panel {
+  flex: 1;
+  background: url('../assets/ola.jpg') no-repeat center center;
+  width: 110px;
+  height: px;
+  background-size: cover;
+}
