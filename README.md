@@ -1,8 +1,9 @@
 # Create a directory 
 
-1. Clone the repository:
+1. Clone the repository and install node_modules:
 ```
 git clone https://github.com/BryanChuc2509/frontend-kango
+npm install
 ```
 2. Create and change to the new branch:
 ```
