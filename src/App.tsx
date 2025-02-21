@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Register from './components/Register';
 import Login from './components/login';
+import VistaPrincipal from './pages/VistaPrincipal';
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} /> {/* Redirige al login por defecto */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/viewUser" element={<VistaPrincipal />} />
+          
         </Routes>
       </Router>
     </GoogleOAuthProvider>
