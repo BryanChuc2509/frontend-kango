@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import "../styles/login.css";
-
-const GOOGLE_CLIENT_ID = "973428652330-pf4rncidpkqktjhnfr12vmf63h9l3rrg.apps.googleusercontent.com"; // clientid de google
+const GOOGLE_CLIENT_ID = "973428652330-pf4rncidpkqktjhnfr12vmf63h9l3rrg.apps.googleusercontent.com";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(""); 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -17,16 +16,11 @@ const Login: React.FC = () => {
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setter(event.target.value);
-      setError(""); 
+      setError("");
     };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
-    if (!email || !password || !otp) {
-      setError("Todos los campos son obligatorios");
-      return;
-    }
 
     try {
       const response = await fetch("http://127.0.0.1:5000/auth/login", {
@@ -40,22 +34,29 @@ const Login: React.FC = () => {
         credentials: "include",
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Error en el inicio de sesión");
-      }
-
       const data = await response.json();
-      alert("Inicio de sesión exitoso 🎉");
-      localStorage.setItem("token", data.token);
-      navigate("/dashboard");
-    } catch (error: any) {
-      setError(error.message || "Error al conectar con el servidor");
+
+      if (response.ok) {
+        alert("Inicio de sesión exitoso");
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("rol", data.rol); 
+
+        if (data.rol === "admin") {
+          navigate("/admin/dashboard"); // Redirige al dashboard de admin
+        } else {
+          navigate("/dashboard"); // Redirige al dashboard normal
+        }
+      } else {
+        setError(data.error || "Error en el inicio de sesión");
+      }
+    } catch (error) {
+      setError("Error al conectar con el servidor");
     }
   };
 
   const handleGoogleSuccess = async (credentialResponse: any) => {
     console.log("Google Login Successful:", credentialResponse);
+
     const googleToken = credentialResponse.credential;
 
     try {
@@ -66,17 +67,23 @@ const Login: React.FC = () => {
         credentials: "include",
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Error en Google Login");
-      }
-
       const data = await response.json();
-      alert("Inicio de sesión exitoso con Google 🎉");
-      localStorage.setItem("token", data.token);
-      navigate("/dashboard");
-    } catch (error: any) {
-      alert(error.message || "Error al conectar con el servidor");
+
+      if (response.ok) {
+        alert("Inicio de sesión exitoso con Google");
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("rol", data.rol);
+
+        if (data.rol === "admin") {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/dashboard");
+        }
+      } else {
+        alert(data.error || "Error al iniciar sesión con Google");
+      }
+    } catch (error) {
+      alert("Error al conectar con el servidor");
     }
   };
 
