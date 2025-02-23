@@ -22,4 +22,5 @@ git commit -m "description about your changes"
 ```
 git push origin feature_new_branch
 ```
-
+# Dependences FRONT
+ + npm i react-router-dom
