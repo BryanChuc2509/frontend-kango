@@ -13,6 +13,8 @@ import FormularioVehiculo from "./pages/FormularioVehiculo";
 import FormularioConductores from "./pages/FormularioConductores";
 import FormularioDestinos from "./pages/FormularioDestinos";
 import ProtectedRoute from "./components/ProtectedRoute"; 
+import VistaPrincipal from './pages/VistaPrincipal';
+
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/viewUser" element={<VistaPrincipal />} />
+
 
           {/* 🔹 Rutas protegidas de admin */}
           <Route element={<ProtectedRoute />}>

@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         if (data.rol === "admin") {
           navigate("/admin/dashboard"); // Redirige al dashboard de admin
         } else {
-          navigate("/dashboard"); // Redirige al dashboard normal
+          navigate("/viewUser"); // Redirige al dashboard normal
         }
       } else {
         setError(data.error || "Error en el inicio de sesión");
@@ -77,7 +77,7 @@ const Login: React.FC = () => {
         if (data.rol === "admin") {
           navigate("/admin/dashboard");
         } else {
-          navigate("/dashboard");
+          navigate("/viewUser");
         }
       } else {
         alert(data.error || "Error al iniciar sesión con Google");
