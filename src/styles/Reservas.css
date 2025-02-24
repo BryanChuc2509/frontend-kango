@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Contenedor principal */
+.reservas-container {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.header {
+  background-color: white;
+  padding: .5rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #04843C;
+}
+
+.logo {
+  font-size: 1.8rem; /* Tamaño del texto más grande */
+  font-weight: bold;
+  color: #04843C;
+  line-height: 1; /* Ajusta la separación entre líneas */
+  text-align: left; /* Asegura alineación */
+  letter-spacing: 2px; /* Espaciado entre letras */
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.logout-button {
+  border: 2px solid #04843C;
+  background: transparent;
+  color: #04843C;
+  padding: 0.8rem 2rem; /* Aumenta el padding para hacerlo más grande */
+  border-radius: 25px; /* Hace los bordes más redondeados */
+  font-weight: bold;
+  font-size: 1.2rem; /* Aumenta el tamaño del texto */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover para resaltar el botón */
+.logout-button:hover {
+  background: #04843C;
+  color: white;
+}
+
+.logout-button:hover {
+  background: #04843C;
+  color: white;
+}
+
+.filters {
+  background-color: #04843C;
+  color: white;
+  display: flex;
+  justify-content: space-between; /* Espaciado uniforme */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem; /* Espacio entre elementos */
+  padding: 1.5rem 2.5rem;
+  border-radius: 25px; /* Bordes redondeados */
+  max-width: 1300px;
+  width: 100%;
+  margin: 1.2rem auto;
+}
+
+/* Cada filtro individual */
+.filter {
+  font-weight: bold;
+  text-align: center;
+  flex: 1; /* Todos los filtros ocupan el mismo espacio */
+  min-width: 220px; /* Evita que se encojan demasiado */
+  font-size: 1.3rem; /* Aumentado para mayor visibilidad */
+}
+
+/* Título de cada filtro */
+.filter-title {
+  font-weight: bold;
+  font-size: 1.3rem; /* Aumentado para mejor visibilidad */
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Valor dentro del filtro */
+.filter span {
+  background: white;
+  color: black;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+  min-width: 220px; /* Ajuste de tamaño mínimo */
+  font-size: 1.3rem; /* Aumentado para mejor legibilidad */
+}
+
+/* Contenedor del título */
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Sección del título y la flecha */
+.title-section {
+  display: flex;
+  align-items: center; /* Alineación vertical centrada */
+  gap: 1rem; /* Espaciado entre la flecha y el título */
+}
+
+/* Flecha de regresar */
+.back-icon {
+  font-size: 1.8rem; /* Tamaño más grande */
+  color: #04843C;
+  cursor: pointer;
+}
+
+/* Título */
+.title {
+  font-size: 2rem; /* Tamaño del texto aumentado */
+  font-weight: bold;
+  color: #04843C;
+  margin: 0; /* Elimina margen extra */
+  text-align: center; /* Centra el texto */
+}
+
+.title-underline {
+  width: 40%; /* Reduce la longitud de la línea */
+  max-width: 600px; /* Ajusta el tamaño máximo en pantallas grandes */
+  height: 1.5px;
+  background-color: #04843C;
+  margin-top: 0.5rem;
+  align-self: center;
+}
+
+.back-button {
+  color: #04843C;
+  font-size: 1.2rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #04843C;
+}
+
+/* Tarjetas de transporte */
+/* Contenedor principal de la lista de transportes */
+.transport-list {
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+/* Tarjetas de transporte */
+.transport-card {
+  background: #F8FCF8; /* Fondo más claro */
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid #04843C; /* Borde verde */
+}
+
+/* Contenedor de contenido */
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Contenedor de imagen */
+.image-container {
+  background-color: #F1F7F1; /* Fondo suave */
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagen del vehículo */
+.transport-image {
+  width: 300px; /* Se aumentó el tamaño de la imagen */
+  height: auto;
+  max-height: 300px; /* Limita la altura para evitar distorsión */
+  object-fit: contain; /* Mantiene la proporción sin recortes */
+}
+
+/* Detalles del transporte */
+.transport-details {
+  flex: 1;
+  font-family: 'Montserrat', sans-serif; /* Fuente Montserrat */
+  color: #04843C; /* Color verde para todo el texto */
+}
+
+/* Título del transporte */
+.transport-title {
+  font-size: 40px; /* Tamaño grande para el título */
+  font-weight: bold;
+  color: #04843C; /* Color verde */
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif; /* Asegura la fuente */
+}
+
+/* Precio */
+.transport-price {
+  font-weight: bold;
+  color: #04843C; /* Color verde */
+  font-size: 1.3rem;
+  margin-top: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Botón de selección */
+.select-button {
+  background: #04843C;
+  color: white;
+  padding: 1rem 3rem; /* Aumenta el tamaño del botón */
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 1.2rem; /* Tamaño de letra más grande */
+  font-weight: bold;
+  transition: background 0.3s ease;
+  display: block; /* Asegura que ocupe su propia línea */
+  margin-top: 15rem; /* Baja el botón */
+  width: 100%; /* Hace el botón más largo */
+  max-width: 250px; /* Evita que sea demasiado ancho en pantallas grandes */
+  text-align: center;
+}
+
+/* Efecto hover para resaltar el botón */
+.select-button:hover {
+  background: #036D32;
+}
+
+.select-button {
+  background: #04843C;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.select-button:hover {
+  background: #04843C;
+}
+
+/* Footer */
+.footer {
+  background-color: #04843C;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.footer-button {
+  color: white;
+  text-decoration: none;
+}
