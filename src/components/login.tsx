@@ -38,11 +38,13 @@ const Login: React.FC = () => {
       });
 
       const data = await response.json();
+      console.log("Respuesta del backend en Login:", data);
 
       if (response.ok) {
-        
         localStorage.setItem("token", data.token);
         localStorage.setItem("rol", data.rol);
+        localStorage.setItem("id", data.id); // ✅ Se guarda el ID del pasajero
+
         setRole(data.rol);
         setLoginSuccess(true);
       } else {
@@ -63,13 +65,17 @@ const Login: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: googleToken }),
         credentials: "include",
+        
       });
 
       const data = await response.json();
+      console.log("Respuesta del backend:", data); // ✅ Verificar si 'id_pasajero' existe
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("rol", data.rol);
+        localStorage.setItem("id", data.id); 
+
         setRole(data.rol);
         setLoginSuccess(true);
       } else {
@@ -80,7 +86,7 @@ const Login: React.FC = () => {
     }
   };
 
-  //redirigir cuando loginSuccess sea a true
+  // Redirigir cuando `loginSuccess` sea `true`
   useEffect(() => {
     if (loginSuccess) {
       const timer = setTimeout(() => {
@@ -89,19 +95,16 @@ const Login: React.FC = () => {
         } else {
           navigate("/viewUser");
         }
-      }, 1500); // Espera 1.5 segundos para ver la animacion
+      }, 1500); // Espera 1.5 segundos para ver la animación
       return () => clearTimeout(timer);
     }
   }, [loginSuccess, role, navigate]);
 
- 
   if (loginSuccess) {
     return (
       <div className="login-success-container">
         <div className="checkmark-container">
-          <div className="checkmark">
-            &#10004;
-          </div>
+          <div className="checkmark">&#10004;</div>
           <h2>Inicio de sesión exitoso</h2>
           <p>Redirigiendo...</p>
         </div>

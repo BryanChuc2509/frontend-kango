@@ -14,7 +14,7 @@ import FormularioConductores from "./pages/FormularioConductores";
 import FormularioDestinos from "./pages/FormularioDestinos";
 import ProtectedRoute from "./components/ProtectedRoute"; 
 import VistaPrincipal from './pages/VistaPrincipal';
-
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/viewUser" element={<VistaPrincipal />} />
-
+          <Route path="/checkout" element={<Checkout />} />
 
           {/* 🔹 Rutas protegidas de admin */}
           <Route element={<ProtectedRoute />}>
