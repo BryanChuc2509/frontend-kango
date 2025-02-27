@@ -1,62 +1,102 @@
-import React, { useEffect, useRef } from "react";
-import { loadScript } from "@paypal/paypal-js";
+import React, { useState, useEffect } from "react";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const PayPalButton: React.FC = () => {
-  const paypalButtonContainerRef = useRef<HTMLDivElement>(null);
+  const [amount, setAmount] = useState<string | null>(null);
+  const idReserva = localStorage.getItem("id_reserva");
+  console.log("ID de reserva que se está enviando:", idReserva);
+  const idPasajero = localStorage.getItem("id");
 
+  // Obtener el precio de la reserva desde el backend
   useEffect(() => {
-    const initializePayPalButton = async () => {
-      try {
-        const paypal = await loadScript({
-          clientId: "AQX2FZmaPNkW9NvOAVm8YUpNZRALQDWuj0TtN2wpL4HegCX1rhMOOye4a6P_InnT1gMTXCjk-3fM8kLK", // Reemplaza con un Client ID válido
-          currency: "MXN",
-        });
+    if (!idReserva) {
+      console.error("No hay id_reserva en localStorage");
+      return;
+    }
 
-        
-        if (paypalButtonContainerRef.current) {
-          paypalButtonContainerRef.current.innerHTML = "";
+    fetch(`http://127.0.0.1:5000/api/precio/${idReserva}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.precio) {
+          setAmount(data.precio);
+        } else {
+          console.error("No se encontró el precio en la reserva");
         }
+      })
+      .catch((error) => console.error("Error obteniendo la reserva:", error));
+  }, [idReserva]);
 
-        if (paypal && paypalButtonContainerRef.current) {
-          paypal.Buttons({
-            createOrder: (data, actions) => {
+  // Función para manejar el éxito del pago y enviarlo al backend
+  const handlePaymentSuccess = (details: any) => {
+    if (!idPasajero || !idReserva) {
+      console.error("Faltan datos del pasajero o la reserva");
+      return;
+    }
+
+    const paymentData = {
+      id: idPasajero, // ID del pasajero que realiza el pago
+      id_reserva: idReserva, // ID de la reserva
+      id_transaccion: details.id, // ID de la transacción de PayPal
+      monto: details.purchase_units[0].amount.value, // Monto pagado
+      estado: details.status, // Estado del pago (Aprobado, Fallido, etc.)
+    };
+
+    fetch("http://127.0.0.1:5000/payments/process-payment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(paymentData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Pago guardado en MongoDB:", data);
+        alert("Pago completado con éxito. ¡Gracias por su compra! ✅");
+      })
+      .catch((error) => {
+        console.error("Error guardando el pago:", error);
+        alert("Hubo un error al procesar el pago. Inténtelo de nuevo.");
+      });
+  };
+
+  return (
+    <PayPalScriptProvider
+      options={{
+        "client-id":
+          "AdzbAOTlXBFbbcw-NPdudBvV5u6EYKOj20gG56nOWSutvLfaQJhaBZITh6q3IAx5jrEw53lKRDRwmJYM",
+      }}
+    >
+      <div style={{ border: "1px solid #ccc", padding: "20px", margin: "20px 0" }}>
+        <h3>Pago con PayPal</h3>
+        {amount ? (
+          <PayPalButtons
+            style={{ layout: "vertical" }}
+            createOrder={(data, actions) => {
               return actions.order.create({
                 purchase_units: [
                   {
-                    amount: { value: "240.00" },
+                    amount: { value: amount },
+                    description: "Pago por reserva de KanGo",
                   },
                 ],
               });
-            },
-            onApprove: (data, actions) => {
-              return actions.order.capture().then((details) => {
-                alert(`Pago completado por ${details.payer.name.given_name}`);
-              });
-            },
-            onError: (err) => {
-              console.error("Error en el pago:", err);
-              alert("Ocurrió un error durante el pago. Por favor, intenta de nuevo.");
-            },
-          }).render(paypalButtonContainerRef.current);
-        }
-      } catch (error) {
-        console.error("Error al cargar el SDK de PayPal:", error);
-      }
-    };
-
-    initializePayPalButton();
-
-    return () => {
-      if (paypalButtonContainerRef.current) {
-        paypalButtonContainerRef.current.innerHTML = "";
-      }
-    };
-  }, []);
-
-  return (
-    <div className="flex justify-center mt-8">
-      <div ref={paypalButtonContainerRef} className="w-full max-w-md p-4 bg-white rounded-lg shadow-md"></div>
-    </div>
+            }}
+            onApprove={async (data, actions) => {
+              if (!actions.order) return;
+              const details = await actions.order.capture();
+              handlePaymentSuccess(details);
+            }}
+            onCancel={() => {
+              alert("Pago cancelado ❌");
+            }}
+            onError={(err) => {
+              alert("Hubo un error con PayPal ⚠️");
+              console.error(err);
+            }}
+          />
+        ) : (
+          <p>Cargando precio de la reserva...</p>
+        )}
+      </div>
+    </PayPalScriptProvider>
   );
 };
 
